@@ -1,0 +1,46 @@
+ 
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: white;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    header img {
+      height: 60px;
+    }
+    footer {
+      margin-top: auto;
+      background-color: #212529;
+      color: #ddd;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .card {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+    .post-card {
+      transition: all 0.3s ease;
+    }
+    .post-card:hover {
+      transform: translateY(-5px);
+    }
+    .spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+    }
+    #toastContainer {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 2000;
+    }
+  
