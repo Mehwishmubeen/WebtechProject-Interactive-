@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-  // Show/hide card info
+
   $("input[name='payment']").change(function(){
     if($("#payCard").is(":checked")){
       $("#cardInfo").slideDown();
@@ -57,7 +57,7 @@ $(document).ready(function(){
       return;
     }
 
-    alert("✅ Order placed successfully!");
+    alert("Order placed successfully!");
   });
 
 });
