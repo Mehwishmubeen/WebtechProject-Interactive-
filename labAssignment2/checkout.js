@@ -1,78 +1,63 @@
-$(document).ready(function() {
-  $("input[name='payment']").change(function() {
-    $("#cardInfo").toggle($("#payCard").is(":checked"));
+
+$(document).ready(function(){
+
+  // Show/hide card info
+  $("input[name='payment']").change(function(){
+    if($("#payCard").is(":checked")){
+      $("#cardInfo").slideDown();
+    } else {
+      $("#cardInfo").slideUp();
+      $("#cardInfo input").val("").removeClass("is-valid is-invalid");
+    }
   });
 
-  $("#checkoutForm").on("submit", function(e) {
+  $("#checkoutForm").on("submit", function(e){
     e.preventDefault();
     let valid = true;
 
-    $(".form-control").removeClass("is-invalid is-valid");
+    function check(id, condition){
+      const field = $(id);
+      if(condition){
+        field.removeClass("is-invalid").addClass("is-valid");
+      } else {
+        field.removeClass("is-valid").addClass("is-invalid");
+        valid = false;
+      }
+    }
 
-    function invalidate(field) {
-      field.addClass("is-invalid");
-      if (valid) field[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    check("#name", $("#name").val().length >= 3);
+    check("#email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#email").val()));
+    check("#phone", /^[0-9]{10,}$/.test($("#phone").val()));
+    check("#address", $("#address").val() !== "");
+    check("#city", $("#city").val() !== "");
+    check("#postal", /^[0-9]{4,6}$/.test($("#postal").val()));
+    check("#country", $("#country").val() !== "");
+
+    if(!$("input[name='payment']:checked").length){
+      alert("Select a payment method");
       valid = false;
     }
 
-    // Full Name
-    let fullName = $("#fullName");
-    if (fullName.val().trim().length < 3) invalidate(fullName); else fullName.addClass("is-valid");
-
-    // Email
-    let email = $("#email");
-    let emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-    if (!emailPattern.test(email.val().trim())) invalidate(email); else email.addClass("is-valid");
-
-    // Phone
-    let phone = $("#phone");
-    if (!/^\d{10,}$/.test(phone.val().trim())) invalidate(phone); else phone.addClass("is-valid");
-
-    // Address
-    let address = $("#address");
-    if (!address.val().trim()) invalidate(address); else address.addClass("is-valid");
-
-    // City
-    let city = $("#city");
-    if (!city.val().trim()) invalidate(city); else city.addClass("is-valid");
-
-    // Postal
-    let postal = $("#postal");
-    if (!/^\d{4,6}$/.test(postal.val().trim())) invalidate(postal); else postal.addClass("is-valid");
-
-    // Country
-    let country = $("#country");
-    if (country.val() === "") invalidate(country); else country.addClass("is-valid");
-
-    // Payment
-    let payment = $("input[name='payment']:checked").val();
-    if (!payment) {
-      alert("Select payment method.");
-      valid = false;
+    if($("#payCard").is(":checked")){
+      check("#cardName", $("#cardName").val() !== "");
+      check("#cardNumber", /^[0-9]{16}$/.test($("#cardNumber").val().replace(/-/g,"")));
+      check("#expiry", /^[0-9]{2}\/[0-9]{2}$/.test($("#expiry").val()));
+      check("#cvv", /^[0-9]{3}$/.test($("#cvv").val()));
     }
 
-    // Card fields
-    if (payment === "card") {
-      $("#cardInfo input").each(function() {
-        if (!$(this).val().trim()) invalidate($(this));
-        else $(this).addClass("is-valid");
-      });
-    }
-
-    // Terms
-    if (!$("#termsCheck").is(":checked")) {
+    if(!$("#termsCheck").is(":checked")){
       $("#termsError").show();
       valid = false;
-      $("#termsCheck")[0].scrollIntoView({ behavior: "smooth", block: "center" });
-    } else {
-      $("#termsError").hide();
+    } else $("#termsError").hide();
+
+    if(!valid){
+      $("html, body").animate({
+        scrollTop: $(".is-invalid:first").offset().top - 120
+      }, 600);
+      return;
     }
 
-    if (valid) {
-      alert("Order placed successfully!");
-      this.reset();
-      $(".is-valid").removeClass("is-valid");
-      $("#cardInfo").hide();
-    }
+    alert("✅ Order placed successfully!");
   });
+
 });
