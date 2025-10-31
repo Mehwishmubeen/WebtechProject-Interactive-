@@ -257,6 +257,7 @@
     margin-bottom: 10px;
 }
 
+/* Contact Styles */
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -291,6 +292,7 @@
     color: #667eea;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .cv-title h1 {
         font-size: 32px;
