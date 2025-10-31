@@ -9,7 +9,7 @@
           posts.slice(0, 8).forEach(post => addPostCard(post));
           showToast('Posts loaded successfully!', 'success');
         })
-        .fail(() => showToast('⚠️ Failed to load posts', 'danger'));
+        .fail(() => showToast(' Failed to load posts', 'danger'));
 
       // CREATE / UPDATE
       $('#postForm').submit(function(e) {
@@ -28,7 +28,7 @@
               const card = $(`#post-${id}`);
               card.find('.card-title').text(updatedPost.title);
               card.find('.card-text').text(updatedPost.body);
-              showToast('✏️ Post updated successfully!', 'info');
+              showToast(' Post updated successfully!', 'info');
               resetForm();
             },
             error: () => showToast(' Failed to update post', 'danger')
