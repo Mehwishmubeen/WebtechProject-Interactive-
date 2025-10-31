@@ -7,7 +7,7 @@
         .done(function(posts) {
           $('#loading').hide();
           posts.slice(0, 8).forEach(post => addPostCard(post));
-          showToast('✅ Posts loaded successfully!', 'success');
+          showToast('Posts loaded successfully!', 'success');
         })
         .fail(() => showToast('⚠️ Failed to load posts', 'danger'));
 
@@ -31,17 +31,17 @@
               showToast('✏️ Post updated successfully!', 'info');
               resetForm();
             },
-            error: () => showToast('⚠️ Failed to update post', 'danger')
+            error: () => showToast(' Failed to update post', 'danger')
           });
         } else {
           // CREATE
           $.post(API_URL, { title, body, userId: 1 })
             .done(function(newPost) {
               addPostCard(newPost);
-              showToast('✅ New post added!', 'success');
+              showToast(' New post added!', 'success');
               resetForm();
             })
-            .fail(() => showToast('⚠️ Failed to add post', 'danger'));
+            .fail(() => showToast(' Failed to add post', 'danger'));
         }
       });
 
@@ -54,9 +54,9 @@
             method: 'DELETE',
             success: function() {
               $(`#post-${id}`).remove();
-              showToast('❌ Post deleted successfully!', 'danger');
+              showToast(' Post deleted successfully!', 'danger');
             },
-            error: () => showToast('⚠️ Failed to delete post', 'danger')
+            error: () => showToast(' Failed to delete post', 'danger')
           });
         }
       });
