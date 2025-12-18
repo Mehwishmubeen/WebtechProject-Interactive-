@@ -1,0 +1,31 @@
+<div class="form-grid">
+  <div class="form-field">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" value="<%= product.name || '' %>" required />
+  </div>
+
+  <div class="form-field">
+    <label for="category">Category</label>
+    <input id="category" name="category" type="text" value="<%= product.category || '' %>" />
+  </div>
+
+  <div class="form-field">
+    <label for="price">Price</label>
+    <input id="price" name="price" type="number" min="0" step="0.01" value="<%= product.price != null ? product.price : '' %>" required />
+  </div>
+
+  <div class="form-field">
+    <label for="stock">Stock</label>
+    <input id="stock" name="stock" type="number" min="0" step="1" value="<%= product.stock != null ? product.stock : '' %>" required />
+  </div>
+
+  <div class="form-field form-field--full">
+    <label for="imageUrl">Image URL</label>
+    <input id="imageUrl" name="imageUrl" type="url" value="<%= product.imageUrl || '' %>" />
+  </div>
+
+  <div class="form-field form-field--full">
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="4"><%= product.description || '' %></textarea>
+  </div>
+</div>

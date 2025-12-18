@@ -1,0 +1,8 @@
+<form class="card" action="/admin/products/<%= product._id %>?_method=PUT" method="POST">
+  <h2>Edit Product</h2>
+  <%- include('admin/products/_form', { product }) %>
+  <div class="form-actions">
+    <a class="button" href="/admin/products">Back</a>
+    <button class="button button--primary" type="submit">Save Changes</button>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title ? `${title} | Admin` : 'Admin Panel' %></title>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <a href="/admin">WebTech Admin</a>
+      </div>
+      <nav class="sidebar__nav">
+        <a href="/admin" class="sidebar__link">Dashboard</a>
+        <a href="/admin/products" class="sidebar__link">Products</a>
+        <a href="/" class="sidebar__link sidebar__link--alt">Storefront</a>
+      </nav>
+    </aside>
+    <div class="admin-content">
+      <header class="admin-header">
+        <h1><%= title || 'Admin Panel' %></h1>
+      </header>
+      <main class="admin-main">
+        <%- body %>
+      </main>
+    </div>
+  </body>
+</html>

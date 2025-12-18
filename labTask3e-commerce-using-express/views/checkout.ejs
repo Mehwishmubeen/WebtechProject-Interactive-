@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+  <link rel="stylesheet" href="/css/checkout.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-T3R2P+PCbM6X64hYpG9u4kZfD2tD/txG2hGrW+Jm6nY3c8U1tB0A6i3DsHz7J0v4+lz1LZkLfHhG3r+F4a0A0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="/js/checkout.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header Partial -->
+  <%- include('partials/header') %>
+
+  <div class="container my-4">
+    <form id="checkoutForm">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <!-- Your checkout form cards here -->
+           <div class="container my-4">
+  <form id="checkoutForm">
+  <div class="row g-4">
+    <div class="col-lg-8">
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title border-bottom pb-2">Customer & Shipping Info</h5>
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="name" class="form-control">
+            <div class="invalid-feedback">Name must be at least 3 characters.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" id="email" class="form-control">
+            <div class="invalid-feedback">Enter a valid email.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input type="tel" id="phone" class="form-control">
+            <div class="invalid-feedback">Enter valid phone (digits only, min 10).</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" id="address" class="form-control">
+            <div class="invalid-feedback">Address required.</div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">City</label>
+              <input type="text" id="city" class="form-control">
+              <div class="invalid-feedback">City required.</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Postal Code</label>
+              <input type="text" id="postal" class="form-control">
+              <div class="invalid-feedback">Postal Code 4–6 numbers.</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Country</label>
+            <select id="country" class="form-select">
+              <option value="">Select country</option>
+              <option>Pakistan</option>
+              <option>India</option>
+              <option>USA</option>
+            </select>
+            <div class="invalid-feedback">Select country.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title border-bottom pb-2">Payment Method</h5>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment" id="payCard">
+            <label class="form-check-label">Card</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment" id="payCOD">
+            <label class="form-check-label">Cash on Delivery (COD)</label>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="payment" id="payWallet">
+            <label class="form-check-label">Wallet</label>
+          </div>
+
+          <div id="cardInfo" style="display:none;">
+            <div class="mb-3">
+              <label class="form-label">Cardholder Name</label>
+              <input type="text" id="cardName" class="form-control">
+              <div class="invalid-feedback">Enter cardholder name.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Card Number</label>
+              <input type="text" id="cardNumber" class="form-control" maxlength="19">
+              <div class="invalid-feedback">Enter valid 16-digit card.</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Expiry (MM/YY)</label>
+                <input type="text" id="expiry" class="form-control" maxlength="5">
+                <div class="invalid-feedback">Enter MM/YY.</div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">CVV</label>
+                <input type="password" id="cvv" class="form-control" maxlength="3">
+                <div class="invalid-feedback">Enter 3-digit CVV.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="termsCheck">
+            <label class="form-check-label">I agree to the terms and conditions</label>
+            <div class="invalid-feedback d-block" id="termsError" style="display:none;">You must agree.</div>
+          </div>
+
+          <button class="btn btn-primary w-100" type="submit">Place Order</button>
+        </div>
+      </div>
+
+    </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Footer Partial -->
+  <%- include('partials/footer') %>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/js/checkout.js"></script>
+</body>
+</html>
