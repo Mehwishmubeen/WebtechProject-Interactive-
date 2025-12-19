@@ -1,9 +1,8 @@
-require('dotenv').config();
 const mongoose = require('mongoose');
 const Product = require('../models/Product');
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/webtech_admin';
-const FORCE = process.argv.includes('--force') || process.env.SEED_FORCE === '1';
+const MONGO_URI = 'mongodb://127.0.0.1:27017/webtech_admin';
+const FORCE = process.argv.includes('--force');
 
 async function run() {
   try {

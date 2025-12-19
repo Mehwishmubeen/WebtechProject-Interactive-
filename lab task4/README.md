@@ -25,15 +25,13 @@ This project implements an admin panel for an e-commerce application using Node.
    npm install
    ```
 
-2. Create a `.env` file based on `.env.example` and update the `MONGO_URI` if needed.
-
-3. Start the development server with hot reload:
+2. Start the development server with hot reload:
 
    ```bash
    npm run dev
    ```
 
-   Or run in production mode:
+3. Or run in production mode:
 
    ```bash
    npm start
