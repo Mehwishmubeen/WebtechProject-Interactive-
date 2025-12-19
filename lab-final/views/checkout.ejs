@@ -18,117 +18,24 @@
       <div class="row g-4">
         <div class="col-lg-8">
           <div class="card shadow-sm mb-4">
-        <div class="card-body">
-          <h5 class="card-title border-bottom pb-2">Customer & Shipping Info</h5>
+            <div class="card-body">
+              <h5 class="card-title border-bottom pb-2">Customer Info</h5>
 
-          <div class="mb-3">
-            <label class="form-label">Full Name</label>
-            <input type="text" id="name" class="form-control">
-            <div class="invalid-feedback">Name must be at least 3 characters.</div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" id="email" class="form-control">
-            <div class="invalid-feedback">Enter a valid email.</div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Phone</label>
-            <input type="tel" id="phone" class="form-control">
-            <div class="invalid-feedback">Enter valid phone (digits only, min 10).</div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Address</label>
-            <input type="text" id="address" class="form-control">
-            <div class="invalid-feedback">Address required.</div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label class="form-label">City</label>
-              <input type="text" id="city" class="form-control">
-              <div class="invalid-feedback">City required.</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Postal Code</label>
-              <input type="text" id="postal" class="form-control">
-              <div class="invalid-feedback">Postal Code 4–6 numbers.</div>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Country</label>
-            <select id="country" class="form-select">
-              <option value="">Select country</option>
-              <option>Pakistan</option>
-              <option>India</option>
-              <option>USA</option>
-            </select>
-            <div class="invalid-feedback">Select country.</div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="card shadow-sm mb-4">
-        <div class="card-body">
-          <h5 class="card-title border-bottom pb-2">Payment Method</h5>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="payment" id="payCard">
-            <label class="form-check-label">Card</label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="payment" id="payCOD">
-            <label class="form-check-label">Cash on Delivery (COD)</label>
-          </div>
-
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="radio" name="payment" id="payWallet">
-            <label class="form-check-label">Wallet</label>
-          </div>
-
-          <div id="cardInfo" style="display:none;">
-            <div class="mb-3">
-              <label class="form-label">Cardholder Name</label>
-              <input type="text" id="cardName" class="form-control">
-              <div class="invalid-feedback">Enter cardholder name.</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Card Number</label>
-              <input type="text" id="cardNumber" class="form-control" maxlength="19">
-              <div class="invalid-feedback">Enter valid 16-digit card.</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Expiry (MM/YY)</label>
-                <input type="text" id="expiry" class="form-control" maxlength="5">
-                <div class="invalid-feedback">Enter MM/YY.</div>
+              <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="name" class="form-control" placeholder="John Doe">
+                <div class="invalid-feedback">Name must be at least 3 characters.</div>
               </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label">CVV</label>
-                <input type="password" id="cvv" class="form-control" maxlength="3">
-                <div class="invalid-feedback">Enter 3-digit CVV.</div>
+
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="john@example.com">
+                <div class="invalid-feedback">Enter a valid email.</div>
               </div>
+
+              <button class="btn btn-primary w-100" type="submit">Place Order</button>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="card shadow-sm mb-4">
-        <div class="card-body">
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="termsCheck">
-            <label class="form-check-label">I agree to the terms and conditions</label>
-            <div class="invalid-feedback d-block" id="termsError" style="display:none;">You must agree.</div>
-          </div>
-
-          <button class="btn btn-primary w-100" type="submit">Place Order</button>
-        </div>
-      </div>
         </div>
         <div class="col-lg-4">
           <div class="card shadow-sm mb-4">
@@ -144,6 +51,9 @@
                 <div class="d-flex justify-content-between">
                   <strong>Total</strong>
                   <strong id="summaryTotal">$0.00</strong>
+                </div>
+                <div class="mt-3 text-end">
+                  <button type="button" id="clearCartBtn" class="btn btn-outline-danger btn-sm">Clear Cart</button>
                 </div>
               </div>
             </div>
@@ -165,6 +75,7 @@
     const summarySubtotal = document.getElementById("summarySubtotal");
     const summaryTotal = document.getElementById("summaryTotal");
     const summaryCount = document.getElementById("summaryCount");
+    const clearCartBtn = document.getElementById("clearCartBtn");
 
     if (!summaryList || !summaryEmpty || !summarySubtotal || !summaryTotal || !summaryCount) {
       return;
@@ -334,6 +245,13 @@
 
     document.addEventListener("DOMContentLoaded", renderSummary);
     window.addEventListener("cart:updated", renderSummary);
+
+    if (clearCartBtn) {
+      clearCartBtn.addEventListener("click", () => {
+        localStorage.removeItem(STORAGE_KEY);
+        window.dispatchEvent(new Event("cart:updated"));
+      });
+    }
   })();
 </script>
 </body>

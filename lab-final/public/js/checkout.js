@@ -1,20 +1,12 @@
 
+// Handle checkout form submission and validation
 $(document).ready(function(){
-
-
-  $("input[name='payment']").change(function(){
-    if($("#payCard").is(":checked")){
-      $("#cardInfo").slideDown();
-    } else {
-      $("#cardInfo").slideUp();
-      $("#cardInfo input").val("").removeClass("is-valid is-invalid");
-    }
-  });
 
   $("#checkoutForm").on("submit", async function(e){
     e.preventDefault();
     let valid = true;
 
+    // Helper to validate fields and show error styling
     function check(id, condition){
       const field = $(id);
       if(condition){
@@ -25,31 +17,11 @@ $(document).ready(function(){
       }
     }
 
+    // Validate name (at least 3 characters) and email format
     check("#name", $("#name").val().length >= 3);
     check("#email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#email").val()));
-    check("#phone", /^[0-9]{10,}$/.test($("#phone").val()));
-    check("#address", $("#address").val() !== "");
-    check("#city", $("#city").val() !== "");
-    check("#postal", /^[0-9]{4,6}$/.test($("#postal").val()));
-    check("#country", $("#country").val() !== "");
 
-    if(!$("input[name='payment']:checked").length){
-      alert("Select a payment method");
-      valid = false;
-    }
-
-    if($("#payCard").is(":checked")){
-      check("#cardName", $("#cardName").val() !== "");
-      check("#cardNumber", /^[0-9]{16}$/.test($("#cardNumber").val().replace(/-/g,"")));
-      check("#expiry", /^[0-9]{2}\/[0-9]{2}$/.test($("#expiry").val()));
-      check("#cvv", /^[0-9]{3}$/.test($("#cvv").val()));
-    }
-
-    if(!$("#termsCheck").is(":checked")){
-      $("#termsError").show();
-      valid = false;
-    } else $("#termsError").hide();
-
+    // If validation failed, scroll to first error
     if(!valid){
       $("html, body").animate({
         scrollTop: $(".is-invalid:first").offset().top - 120
@@ -58,12 +30,14 @@ $(document).ready(function(){
     }
 
     try {
+      // Get cart items from localStorage
       const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
       const payload = {
         customerName: $("#name").val(),
         email: $("#email").val(),
         items
       };
+      // Send order to server
       const resp = await fetch("/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -74,7 +48,7 @@ $(document).ready(function(){
         alert(data?.error || "Failed to place order");
         return;
       }
-      // Clear client cart and redirect to confirmation
+      // Order successful - clear cart and go to confirmation page
       localStorage.removeItem("cartItems");
       window.dispatchEvent(new Event("cart:updated"));
       window.location.href = `/order/confirmation/${data.orderId}`;

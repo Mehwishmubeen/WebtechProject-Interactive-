@@ -1,8 +1,10 @@
+// Script to populate the database with sample products
 require("dotenv").config();
 const mongoose = require("mongoose");
 const Product = require("./models/products");
 
-const uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ecommerceDB";
+// Connect to the same database the app uses
+const uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/BeinteractiveDB";
 
 mongoose
   .connect(uri)
@@ -134,9 +136,12 @@ const products = [
   }
 ];
 
+// Function to clear old products and add new ones
 async function seed() {
   try {
+    // Remove all existing products first
     await Product.deleteMany({});
+    // Insert the sample products
     const inserted = await Product.insertMany(products);
     console.log(`${inserted.length} products added`);
   } catch (err) {
@@ -146,4 +151,5 @@ async function seed() {
   }
 }
 
+// Run seeding once database is connected
 mongoose.connection.once("open", seed);

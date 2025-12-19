@@ -1,0 +1,56 @@
+<section class="checkout">
+  <h2>Checkout</h2>
+
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert--error"><%= error %></div>
+  <% } %>
+
+  <div class="cart">
+    <h3>Your Cart</h3>
+    <% if (cart.items.length === 0) { %>
+      <p>Your cart is empty.</p>
+    <% } else { %>
+      <table class="cart__table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Line Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% cart.items.forEach(function(it){ %>
+            <tr>
+              <td><%= it.name %></td>
+              <td>$<%= Number(it.price).toFixed(2) %></td>
+              <td><%= it.quantity %></td>
+              <td>$<%= (Number(it.price) * Number(it.quantity)).toFixed(2) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-right">Total</td>
+            <td>$<%= Number(cart.totalAmount).toFixed(2) %></td>
+          </tr>
+        </tfoot>
+      </table>
+    <% } %>
+  </div>
+
+  <div class="checkout__form">
+    <h3>Customer Information</h3>
+    <form method="POST" action="/checkout">
+      <div class="form__row">
+        <label for="customerName">Name</label>
+        <input type="text" id="customerName" name="customerName" required />
+      </div>
+      <div class="form__row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <button type="submit" class="btn btn--primary" <%= cart.items.length === 0 ? 'disabled' : '' %>>Place Order</button>
+    </form>
+  </div>
+</section>

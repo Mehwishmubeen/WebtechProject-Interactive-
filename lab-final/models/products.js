@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Product schema - defines what each product looks like
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
@@ -11,6 +12,7 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Add indexes to make filtering by category and price faster
 productSchema.index({ category: 1 });
 productSchema.index({ price: 1 });
 

@@ -51,6 +51,7 @@
         <a href="#">COMPANY</a>
         <a href="#">PORTFOLIO</a>
         <a href="/checkout">CHECKOUT</a>
+        <a href="/admin/orders?email=admin@shop.com">ADMIN</a>
       </ul>
     </div>
   </div>
@@ -184,9 +185,12 @@
         const existing = cart.find((entry) => entry.id === item.id);
 
         if (existing) {
+          // Prevent duplicate - just increase quantity
           existing.quantity += item.quantity;
+          alert(`Updated ${item.name} quantity to ${existing.quantity}`);
         } else {
           cart.push(item);
+          alert(`Added ${item.name} to cart`);
         }
 
         saveCart(cart);

@@ -3,8 +3,10 @@ const express = require('express');
 const methodOverride = require('method-override');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 const adminRouter = require('./routes/admin');
+const storeRouter = require('./routes/store');
 
 const app = express();
 
@@ -17,12 +19,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'dev_session_secret',
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
 app.get('/', (req, res) => {
   res.render('store/home', { title: 'Welcome to the Store' });
 });
 
 app.use('/admin', adminRouter);
+app.use('/', storeRouter);
 
 app.get('/health/db', async (req, res) => {
   const stateMap = {
