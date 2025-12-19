@@ -10,7 +10,6 @@ async function run() {
     await mongoose.connect(MONGO_URI);
     console.log('Connected to MongoDB for seeding');
 
-    const now = new Date();
     const products = [
       {
         name: 'Notebook A5',
@@ -18,9 +17,7 @@ async function run() {
         price: 149,
         category: 'Stationery',
         stock: 25,
-        imageUrl: '',
-        createdAt: now,
-        updatedAt: now
+        imageUrl: ''
       },
       {
         name: 'Wireless Mouse',
@@ -28,9 +25,7 @@ async function run() {
         price: 799,
         category: 'Electronics',
         stock: 40,
-        imageUrl: '',
-        createdAt: now,
-        updatedAt: now
+        imageUrl: ''
       },
       {
         name: 'Coffee Mug',
@@ -38,9 +33,7 @@ async function run() {
         price: 249,
         category: 'Kitchen',
         stock: 60,
-        imageUrl: '',
-        createdAt: now,
-        updatedAt: now
+        imageUrl: ''
       }
     ];
 
