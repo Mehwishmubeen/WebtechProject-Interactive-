@@ -10,7 +10,7 @@
       <tr>
         <th>Name</th>
         <th>Category</th>
-        <th>Price</th>
+        <th>Price (₹)</th>
         <th>Stock</th>
         <th>Updated</th>
         <th></th>
@@ -21,7 +21,7 @@
         <tr>
           <td><%= product.name %></td>
           <td><%= product.category %></td>
-          <td>$<%= product.price.toFixed(2) %></td>
+          <td><%= product.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' }) %></td>
           <td><%= product.stock %></td>
           <td><%= product.updatedAt.toLocaleDateString() %></td>
           <td class="table__actions">

@@ -1,12 +1,12 @@
 :root {
   --sidebar-width: 220px;
   --color-primary: #1d4ed8;
-  --color-secondary: #1f2937;
-  --color-surface: #ffffff;
+  --color-secondary: #ffffff; /* global text color */
+  --color-surface: #111111;   /* card/header background */
   --color-muted: #6b7280;
-  --color-border: #e5e7eb;
+  --color-border: #333333;
   --color-danger: #dc2626;
-  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.1);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -16,7 +16,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f3f4f6;
+  background-color: #000000;
   color: var(--color-secondary);
   display: flex;
 }
@@ -24,7 +24,7 @@ body {
 .sidebar {
   width: var(--sidebar-width);
   min-height: 100vh;
-  background-color: var(--color-secondary);
+  background-color: #000000;
   color: #ffffff;
   padding: 2rem 1.5rem;
   display: flex;
@@ -180,6 +180,24 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+.alert {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+}
+
+.alert--error {
+  border-color: rgba(220, 38, 38, 0.35);
+  background-color: rgba(220, 38, 38, 0.08);
+  color: var(--color-danger);
+}
+
+.alert ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -207,6 +225,8 @@ textarea {
   border-radius: 0.75rem;
   border: 1px solid var(--color-border);
   font-size: 1rem;
+  background-color: #000000;
+  color: var(--color-secondary);
 }
 
 textarea {

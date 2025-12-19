@@ -34,7 +34,8 @@ const productSchema = new mongoose.Schema(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    collection: process.env.MONGO_COLLECTION || undefined
   }
 );
 

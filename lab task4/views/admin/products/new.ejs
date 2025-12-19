@@ -1,6 +1,15 @@
 <form class="card" action="/admin/products" method="POST">
   <h2>Add Product</h2>
-  <%- include('admin/products/_form', { product }) %>
+  <% if (errors && errors.length) { %>
+    <div class="alert alert--error">
+      <ul>
+        <% errors.forEach((message) => { %>
+          <li><%= message %></li>
+        <% }) %>
+      </ul>
+    </div>
+  <% } %>
+  <%- include('./_form', { product }) %>
   <div class="form-actions">
     <a class="button" href="/admin/products">Cancel</a>
     <button class="button button--primary" type="submit">Create</button>
