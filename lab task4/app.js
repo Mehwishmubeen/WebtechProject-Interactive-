@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
 
 app.use('/admin', adminRouter);
 
-// Lightweight DB health check: returns connection state and counts
 app.get('/health/db', async (req, res) => {
   const stateMap = {
     0: 'disconnected',
@@ -38,7 +37,6 @@ app.get('/health/db', async (req, res) => {
     const Product = require('./models/Product');
     productCount = await Product.countDocuments();
   } catch (e) {
-    // ignore count errors, still return connection state
   }
   res.json({
     status: stateMap[state] || String(state),
@@ -46,7 +44,6 @@ app.get('/health/db', async (req, res) => {
   });
 });
 
-// Sample products payload to verify field alignment with existing data
 app.get('/health/products', async (req, res) => {
   try {
     const Product = require('./models/Product');
@@ -65,7 +62,6 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  // Basic error fallback for unexpected failures
   console.error(err);
   res.status(500).render('errors/500', {
     title: 'Server Error',
