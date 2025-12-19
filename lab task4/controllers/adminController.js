@@ -46,10 +46,21 @@ async function getProducts(req, res, next) {
   try {
     const productsRaw = await Product.find().sort({ createdAt: -1 });
     const products = productsRaw.map(normalizeProduct);
+    const { success } = req.query;
+    let flash = null;
+    if (success === 'created') {
+      flash = { type: 'success', message: 'Product created successfully.' };
+    } else if (success === 'updated') {
+      flash = { type: 'success', message: 'Product updated successfully.' };
+    } else if (success === 'deleted') {
+      flash = { type: 'success', message: 'Product deleted successfully.' };
+    }
+
     res.render('admin/products/index', {
       title: 'Manage Products',
       layout: 'layouts/admin',
-      products
+      products,
+      flash
     });
   } catch (error) {
     next(error);
@@ -70,8 +81,9 @@ async function createProduct(req, res, next) {
   const productData = { name, category, price, stock, imageUrl, description };
 
   try {
+    console.log('[admin] createProduct body:', req.body);
     await Product.create(productData);
-    res.redirect('/admin/products');
+    res.redirect('/admin/products?success=created');
   } catch (error) {
     if (error.name === 'ValidationError') {
       const errors = Object.values(error.errors).map((err) => err.message);
@@ -158,7 +170,7 @@ async function deleteProduct(req, res, next) {
       });
     }
 
-    res.redirect('/admin/products');
+    res.redirect('/admin/products?success=deleted');
   } catch (error) {
     next(error);
   }

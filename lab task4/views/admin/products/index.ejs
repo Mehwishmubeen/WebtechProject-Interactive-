@@ -2,6 +2,10 @@
   <a class="button button--primary" href="/admin/products/new">Add Product</a>
 </div>
 
+<% if (typeof flash !== 'undefined' && flash) { %>
+  <div class="alert alert--<%= flash.type %>"><%= flash.message %></div>
+<% } %>
+
 <% if (products.length === 0) { %>
   <p>No products found. Start by <a href="/admin/products/new">creating one</a>.</p>
 <% } else { %>
